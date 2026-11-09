@@ -1,0 +1,421 @@
+
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#ffffff">
+  <title>ROOM AI - AI Interior Designer</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="navbar">
+    <a href="#" class="logo">
+      <span class="logo-icon">R</span>
+      ROOM<span>AI</span>
+    </a>
+
+    <nav>
+      <a href="#home" data-i18n="home">Bosh sahifa</a>
+      <a href="#designer" data-i18n="designer">Dizayner</a>
+      <a href="#styles" data-i18n="styles">Uslublar</a>
+    </nav>
+
+    <div class="nav-right">
+      <select id="language">
+        <option value="uz">UZ</option>
+        <option value="ru">RU</option>
+        <option value="en">EN</option>
+      </select>
+      <a href="#designer" class="nav-button" data-i18n="start">Boshlash</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="hero-content">
+        <div class="tag">✦ AI INTERIOR DESIGN</div>
+
+        <h1 data-i18n="heroTitle">
+          Xonangizni yangi dunyoga aylantiring.
+        </h1>
+
+        <p data-i18n="heroText">
+          Xonangiz rasmini yuklang va sun'iy intellekt yordamida
+          yangi interyer g‘oyalarini kashf eting.
+        </p>
+
+        <a href="#designer" class="primary-button" data-i18n="try">
+          Dizaynni boshlash →
+        </a>
+
+        <div class="hero-stats">
+          <div><strong>AI</strong><span>Design</span></div>
+          <div><strong>3+</strong><span>Languages</span></div>
+          <div><strong>∞</strong><span>Ideas</span></div>
+        </div>
+      </div>
+
+      <div class="hero-image">
+        <img
+          src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=1000"
+          alt="Modern living room"
+        >
+        <div class="floating-card">
+          <span>✦</span>
+          <div>
+            <strong>AI Interior</strong>
+            <small>New possibilities</small>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="designer-section" id="designer">
+      <div class="section-heading">
+        <span class="tag">YOUR PERSONAL DESIGNER</span>
+        <h2 data-i18n="designerTitle">O'z xonangizni loyihalang</h2>
+        <p data-i18n="designerText">
+          Rasm yuklang, xona turini va dizayn uslubini tanlang.
+        </p>
+      </div>
+
+      <div class="designer-grid">
+        <div class="upload-panel">
+          <h3 data-i18n="uploadTitle">Xona rasmini yuklang</h3>
+
+          <label for="roomImage" class="upload-box" id="uploadBox">
+            <div id="uploadPlaceholder">
+              <div class="upload-icon">＋</div>
+              <strong data-i18n="uploadClick">Rasm tanlash uchun bosing</strong>
+              <small>JPG, PNG, WEBP</small>
+            </div>
+            <img id="preview" class="hidden" alt="Room preview">
+          </label>
+
+          <input type="file" id="roomImage" accept="image/jpeg,image/png,image/webp" hidden>
+
+          <button id="removeImage" class="remove-button hidden" type="button" data-i18n="remove">
+            Rasmni o'chirish
+          </button>
+
+          <div class="form-group">
+            <label data-i18n="roomType">Xona turi</label>
+            <select id="roomType">
+              <option value="living" data-i18n="living">Mehmonxona</option>
+              <option value="bedroom" data-i18n="bedroom">Yotoqxona</option>
+              <option value="kitchen" data-i18n="kitchen">Oshxona</option>
+              <option value="office" data-i18n="office">Ish xonasi</option>
+              <option value="bathroom" data-i18n="bathroom">Hammom</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label data-i18n="designStyle">Dizayn uslubi</label>
+            <select id="designStyle">
+              <option value="modern">Modern</option>
+              <option value="minimalist">Minimalist</option>
+              <option value="luxury">Luxury</option>
+              <option value="scandinavian">Scandinavian</option>
+              <option value="futuristic">Futuristic</option>
+              <option value="classic">Classic</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label data-i18n="color">Asosiy rang</label>
+            <div class="color-options">
+              <button class="color active" data-color="white" style="background:#f5f1e9" aria-label="White"></button>
+              <button class="color" data-color="black" style="background:#252525" aria-label="Black"></button>
+              <button class="color" data-color="blue" style="background:#8eadd5" aria-label="Blue"></button>
+              <button class="color" data-color="green" style="background:#819b83" aria-label="Green"></button>
+              <button class="color" data-color="brown" style="background:#aa795b" aria-label="Brown"></button>
+            </div>
+          </div>
+
+          <button id="generateBtn" class="generate-button" type="button">
+            ✦ <span data-i18n="generate">AI bilan dizayn yaratish</span>
+          </button>
+
+          <p id="status" class="status" aria-live="polite"></p>
+        </div>
+
+        <div class="preview-panel">
+          <div class="preview-header">
+            <h3 data-i18n="previewTitle">Sizning loyihangiz</h3>
+            <span class="live-badge">● LIVE PREVIEW</span>
+          </div>
+
+          <div class="room-preview">
+            <img
+              id="designPreview"
+              src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=1000"
+              alt="Interior design preview"
+            >
+          </div>
+
+          <div class="preview-info">
+            <div>
+              <strong id="previewStyle">Modern</strong>
+              <p id="previewRoom">Living room · White</p>
+            </div>
+            <span class="ai-label">ROOM AI</span>
+          </div>
+
+          <div class="notice">
+            ✦ <span data-i18n="notice">
+              Bu hozircha ko'rish oynasi. Haqiqiy AI dizayn yaratish
+              xizmati keyingi bosqichda ulanadi.
+            </span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="styles-section" id="styles">
+      <div class="section-heading">
+        <span class="tag">EXPLORE POSSIBILITIES</span>
+        <h2 data-i18n="stylesTitle">Dizayn uslublari</h2>
+        <p data-i18n="stylesText">O'zingizga yoqqan uslubni tanlang.</p>
+      </div>
+
+      <div class="style-grid">
+        <button class="style-card" data-style="modern">
+          <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=600" alt="Modern">
+          <span>Modern</span>
+        </button>
+
+        <button class="style-card" data-style="minimalist">
+          <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600" alt="Minimalist">
+          <span>Minimalist</span>
+        </button>
+
+        <button class="style-card" data-style="luxury">
+          <img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=600" alt="Luxury">
+          <span>Luxury</span>
+        </button>
+
+        <button class="style-card" data-style="scandinavian">
+          <img src="https://images.unsplash.com/photo-1600210491369-e753d80a41f3?w=600" alt="Scandinavian">
+          <span>Scandinavian</span>
+        </button>
+      </div>
+    </section>
+
+    <section class="cta">
+      <h2 data-i18n="ctaTitle">Orzuingizdagi xona shu yerdan boshlanadi.</h2>
+      <a href="#designer" class="primary-button" data-i18n="try">
+        Dizaynni boshlash →
+      </a>
+    </section>
+  </main>
+
+  <footer>
+    <a href="#" class="logo">ROOM<span>AI</span></a>
+    <p>© 2026 ROOM AI. All rights reserved.</p>
+    <p data-i18n="footer">AI yordamida interyer dizayni.</p>
+  </footer>
+
+  <!-- PREMIUM SECTION -->
+<section class="premium-section" id="premium">
+    <div class="premium-container">
+        <div class="premium-label">✦ ROOM AI PREMIUM</div>
+
+        <h2>Oddiy xonadan — orzuingizdagi interyergacha</h2>
+
+        <p>Premium imkoniyatlar bilan xonangizni yanada chiroyli loyihalashtiring.</p>
+
+        <div class="premium-cards">
+
+            <div class="premium-card">
+                <h3>FREE</h3>
+                <div class="premium-price">0 so‘m</div>
+
+                <ul>
+                    <li>✓ Oddiy dizaynlar</li>
+                    <li>✓ 3 ta dizayn uslubi</li>
+                    <li>✓ Rasm yuklash</li>
+                    <li>✕ Maxsus dizaynlar</li>
+                </ul>
+
+                <button class="premium-btn free-btn">
+                    Bepul foydalanish
+                </button>
+            </div>
+
+            <div class="premium-card pro-card">
+                <div class="popular">ENG MASHHUR</div>
+
+                <h3>ROOM AI PRO ✦</h3>
+                <div class="premium-price">49 000 <span>so‘m / oy</span></div>
+
+                <ul>
+                    <li>✓ Barcha dizayn uslublari</li>
+                    <li>✓ Cheksiz dizayn loyihalari</li>
+                    <li>✓ Premium ranglar</li>
+                    <li>✓ Yuqori sifatli natijalar</li>
+                    <li>✓ Maxsus interyer g‘oyalari</li>
+                </ul>
+
+                <button class="premium-btn pro-btn" onclick="openPremium()">
+                    Premiumni tanlash ✦
+                </button>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- PREMIUM MODAL -->
+<div class="premium-modal" id="premiumModal">
+    <div class="premium-modal-content">
+        <button class="close-modal" onclick="closePremium()">×</button>
+
+        <div class="modal-icon">✦</div>
+        <h2>ROOM AI PRO</h2>
+
+        <p>Premium imkoniyatlar tez orada ishga tushadi!</p>
+
+        <div class="modal-price">49 000 so‘m / oy</div>
+
+        <button class="premium-btn pro-btn" onclick="closePremium()">
+            Tushunarli
+        </button>
+    </div>
+</div>
+
+<!-- PREMIUM DASHBOARD -->
+<section class="dashboard-section" id="dashboard">
+
+    <div class="dashboard-header">
+        <div>
+            <span class="dashboard-tag">✦ ROOM AI STUDIO</span>
+            <h1>Your Creative Space</h1>
+            <p>Orzudagi interyerni yaratish uchun barcha imkoniyatlar bir joyda.</p>
+        </div>
+
+        <div class="pro-user">
+            <div class="user-avatar">M</div>
+            <div>
+                <strong>Creative User</strong>
+                <span>✦ PRO MEMBER</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="dashboard-stats">
+
+        <div class="stat-card">
+            <div class="stat-icon purple">✦</div>
+            <span>Jami loyihalar</span>
+            <h2 id="projectCount">12</h2>
+            <small>Yaratilgan dizaynlar</small>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon blue">◈</div>
+            <span>Saqlangan dizaynlar</span>
+            <h2 id="savedCount">08</h2>
+            <small>Sevimli loyihalar</small>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon gold">✧</div>
+            <span>Hisob holati</span>
+            <h2>PRO</h2>
+            <small>Premium imkoniyatlar</small>
+        </div>
+
+    </div>
+
+    <div class="dashboard-content">
+
+        <div class="dashboard-main">
+            <div class="section-heading">
+                <div>
+                    <h2>Explore Designs</h2>
+                    <p>Ommabop interyer uslublari</p>
+                </div>
+                <span class="view-all">VIEW ALL →</span>
+            </div>
+
+            <div class="design-grid">
+
+                <div class="design-item">
+                    <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=700" alt="Modern living room">
+                    <div class="design-info">
+                        <div>
+                            <h3>Modern Luxury</h3>
+                            <span>Living Room</span>
+                        </div>
+                        <button onclick="saveDesign(this)">♡</button>
+                    </div>
+                </div>
+
+                <div class="design-item">
+                    <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=700" alt="Minimal interior">
+                    <div class="design-info">
+                        <div>
+                            <h3>Minimal Space</h3>
+                            <span>Interior Design</span>
+                        </div>
+                        <button onclick="saveDesign(this)">♡</button>
+                    </div>
+                </div>
+
+                <div class="design-item">
+                    <img src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=700" alt="Luxury interior">
+                    <div class="design-info">
+                        <div>
+                            <h3>Luxury Home</h3>
+                            <span>Premium Style</span>
+                        </div>
+                        <button onclick="saveDesign(this)">♡</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <aside class="dashboard-side">
+
+            <div class="pro-card-dashboard">
+                <div class="pro-star">✦</div>
+                <span>EXCLUSIVE ACCESS</span>
+                <h2>Unlock Your Creativity</h2>
+                <p>ROOM AI PRO bilan yangi darajadagi interyer dizaynlarini kashf eting.</p>
+                <button onclick="document.getElementById('premium').scrollIntoView({behavior:'smooth'})">
+                    Explore PRO →
+                </button>
+            </div>
+
+            <div class="activity-card">
+                <h3>Recent Activity</h3>
+                <div class="activity-row">
+                    <span class="activity-dot"></span>
+                    <div>
+                        <strong>Modern Living Room</strong>
+                        <small>Recently viewed</small>
+                    </div>
+                </div>
+                <div class="activity-row">
+                    <span class="activity-dot"></span>
+                    <div>
+                        <strong>Minimal Bedroom</strong>
+                        <small>Recently viewed</small>
+                    </div>
+                </div>
+            </div>
+
+        </aside>
+
+    </div>
+
+</section>
+
+  <script src="script.js"></script>
+</body>
+</html>
